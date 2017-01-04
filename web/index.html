@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Paleo Matrix Meal Maker</title>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/index.js"></script>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/matrix.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-default">  
+  <div class="container-fluid">
+   <div class="navbar-header">
+     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
+     <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+   </div> 
+   <div class="collapse navbar-collapse"  id="main-navbar">
+     <ul class="nav navbar-nav">
+       <li ><a href="http://www.richardsonprogramming.com">RichardsonProgramming</a></li>
+       <li class="active"><a href="#">Meal Matrix</a></li>
+       <!--<li ><a href="html/video.html">Video Demo</a></li>-->
+     </ul>
+   </div>
+   </div>
+  </nav>
+
+ <h1>Paleo Matrix Meal Generator</h1>
+  <ol class="breadcrumb">
+  <li><a href="http://www.richardsonprogramming.com">RichardsonProgramming</a></li>
+  <li class="active">Meal Matrix</li>
+  </ol>
+
+<!--<h1 align="center">Paleo Matrix Meal Generator</h1>-->
+
+<form id="startMatrix" method="POST" action="FillMatrix.do">
+
+	<center>
+		<input type="SUBMIT" name="submit" value= "Use Meal Generator">
+	</center>
+</form>
+<div id="main">	
+</div>
+
+</body>
+</html>
