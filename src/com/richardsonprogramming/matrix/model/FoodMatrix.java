@@ -10,12 +10,12 @@
 package com.richardsonprogramming.matrix.model;
 
 import java.sql.*;
+import javax.sql.DataSource;
 import java.util.*;
-import javax.servlet.ServletContext;
 
 public class FoodMatrix {
 
-	public List<List<Food>> getFoodLists(ServletContext sc) {
+	public List<List<Food>> getFoodLists(DataSource ds) {
 		
 		// food object lists containing food items, 1 list per food type
 		List<Food> veggies = new ArrayList<Food>();
@@ -34,10 +34,9 @@ public class FoodMatrix {
 		foodObjectLists.add(fats);
 		foodObjectLists.add(seasonings);
 
-		Connection con = (Connection) sc.getAttribute("DBConnection"); 
 		String selectSql = "SELECT type, name, servingSize FROM Food WHERE type = ?";
 
-		try (PreparedStatement ps = con.prepareStatement(selectSql)) {
+		try (Connection con = ds.getConnection();  PreparedStatement ps = con.prepareStatement(selectSql)) {
 			
 			String [] types = {"veggies", "proteins", "fruits", "fats", "seasonings"};
 			// to index into appropriate food object list

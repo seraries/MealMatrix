@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+
+    <Resource name="jdbc/myDB"
+          auth="Container"
+          type="javax.sql.DataSource"
+          factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+          testWhileIdle="true"
+          testOnBorrow="true"
+          testOnReturn="false"
+          validationQuery="SELECT 1"
+          timeBetweenEvictionRunsMillis="30000"
+          maxActive="10"
+          maxIdle="10"
+          minIdle="1"
+          maxWaitMillis="15000"
+          removeAbandonedTimeout="60"
+          removeAbandoned="true"
+          logAbandoned="true"
+          minEvictableIdleTimeMillis="30000"
+          closeMethod="close"
+          jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"
+          username="sarah"
+          password="sarah123"
+          driverClassName="com.mysql.jdbc.Driver"
+          url="jdbc:mysql://my-db-mysql-identifier.cflvmv9k2u9d.us-west-2.rds.amazonaws.com:3306/FoodDB?useSSL=false"/>
+ 
+</Context>
+
+

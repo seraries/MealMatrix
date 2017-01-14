@@ -3,18 +3,26 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	version="2.4">
 
+  <resource-ref>
+    <description>JDBC Connection Pool</description>
+    <res-ref-name>jdbc/myDB</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+
 	<display-name>MatrixTrial</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
-    
-    <listener>
-        <listener-class>com.richardsonprogramming.matrix.web.listeners.AppContextListener</listener-class>
-    </listener>
+
+  <listener>
+          <listener-class>com.richardsonprogramming.matrix.web.listeners.AppContextListener</listener-class>
+  </listener>
 
 	<servlet>
 		<servlet-name>Matrix</servlet-name>
 		<servlet-class>com.richardsonprogramming.matrix.web.FillMatrixServlet</servlet-class>
+    <load-on-startup> 1</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
@@ -25,6 +33,7 @@
   <servlet>
     <servlet-name>RandomMeals</servlet-name>
     <servlet-class>com.richardsonprogramming.matrix.web.MakeRandomMealsServlet</servlet-class>
+    <load-on-startup> 1</load-on-startup>
   </servlet>
 
   <servlet-mapping>
@@ -35,6 +44,7 @@
   <servlet>
     <servlet-name>EditFoods</servlet-name>
     <servlet-class>com.richardsonprogramming.matrix.web.EditMatrixServlet</servlet-class>
+    <load-on-startup> 1</load-on-startup>
   </servlet>
 
   <servlet-mapping>
@@ -45,6 +55,7 @@
   <servlet>
     <servlet-name>ResetFoods</servlet-name>
     <servlet-class>com.richardsonprogramming.matrix.web.ResetMatrixServlet</servlet-class>
+    <load-on-startup> 1</load-on-startup>
   </servlet>
 
   <servlet-mapping>
@@ -70,7 +81,26 @@
 		<load-on-startup>3</load-on-startup>
 	</servlet>
 
-	<filter>
+  <session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
+
+  <error-page>
+    <error-code>403</error-code>
+    <location>/errorPage.jsp</location>
+  </error-page>
+
+    <error-page>
+    <error-code>404</error-code>
+    <location>/errorPage.jsp</location>
+  </error-page>
+	
+   <error-page>
+    <error-code>500</error-code>
+    <location>/errorPage.jsp</location>
+  </error-page>
+
+  <filter>
   <filter-name>CorsFilter</filter-name>
   <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
   <init-param>

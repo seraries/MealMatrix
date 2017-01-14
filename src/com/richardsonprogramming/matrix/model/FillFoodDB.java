@@ -11,12 +11,11 @@ package com.richardsonprogramming.matrix.model;
 
 import java.sql.*;
 import java.util.*;
-import javax.servlet.ServletContext;
+import javax.sql.DataSource;
 
 public class FillFoodDB {
 
-	public void resetDB(ServletContext sc) {
-		Connection con = (Connection) sc.getAttribute("DBConnection"); 
+	public void resetDB(DataSource ds) {
 		// raw data arrays (initial foods to put in the database)
 		String [][] foodData = {{"veggies", "celery", "1/2 cup"}, {"veggies", 
 		"mushrooms", "1 cup"}, {"veggies", "tomatoes", "1/2 cup"}, {"veggies", 
@@ -93,7 +92,8 @@ public class FillFoodDB {
 						+ "type varchar(20), name varchar(45), servingSize varchar(45))";
 		String insertSql = "insert into Food values (NULL, ?, ?, ?)";
 
-		try (PreparedStatement psDrop = con.prepareStatement(dropSql); 
+		try (Connection con = ds.getConnection(); 
+			PreparedStatement psDrop = con.prepareStatement(dropSql); 
 			PreparedStatement psCreate = con.prepareStatement(createSql);
 			PreparedStatement psInsert = con.prepareStatement(insertSql)) {
 

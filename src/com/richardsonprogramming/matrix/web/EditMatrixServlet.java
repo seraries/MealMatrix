@@ -16,6 +16,7 @@ import javax.servlet.http.*;
 import java.io.*;
 import java.util.*;
 import java.sql.*;
+import javax.sql.DataSource;
 
 public class EditMatrixServlet extends HttpServlet {
 
@@ -23,8 +24,9 @@ public class EditMatrixServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 						throws IOException, ServletException {
-
-		EditFood ef = new EditFood(getServletContext());
+		// get connection pool to pass in to model layer so it can get connection
+		DataSource ds = (DataSource)getServletContext().getAttribute("DBCPool");
+		EditFood ef = new EditFood(ds);
 
 		// pass in user input string in lower case to add or delete method
 		// since all food items in the database are lower case
@@ -41,7 +43,7 @@ public class EditMatrixServlet extends HttpServlet {
 
 		// now that food DB has been updated, get an updated list of foods 
 		FoodMatrix fm = new FoodMatrix();	
-		List<List<Food>> foodLists = fm.getFoodLists(getServletContext());
+		List<List<Food>> foodLists = fm.getFoodLists(ds);
 		
 		// use this list to add headers to textareas that state the food types
 		List<String> foodTypes = new ArrayList<String>();

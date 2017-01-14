@@ -30,3 +30,7 @@ input[type="radio"] {
 	width: 17px;
 	height: 17px;
 }
+img {
+	width: 70%;
+	height: auto;
+}
