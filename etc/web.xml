@@ -11,12 +11,13 @@
   </resource-ref>
 
 	<display-name>MatrixTrial</display-name>
-	<welcome-file-list>
+	
+  <welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
   <listener>
-          <listener-class>com.richardsonprogramming.matrix.web.listeners.AppContextListener</listener-class>
+    <listener-class>com.richardsonprogramming.matrix.web.listeners.AppContextListener</listener-class>
   </listener>
 
 	<servlet>
@@ -29,6 +30,28 @@
 		<servlet-name>Matrix</servlet-name>
 		<url-pattern>/FillMatrix.do</url-pattern>
 	</servlet-mapping>
+
+  <servlet>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>com.richardsonprogramming.matrix.web.LogoutServlet</servlet-class>
+    <load-on-startup> 1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout.do</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Register</servlet-name>
+    <servlet-class>com.richardsonprogramming.matrix.web.RegisterServlet</servlet-class>
+    <load-on-startup> 1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Register</servlet-name>
+    <url-pattern>/Register.do</url-pattern>
+  </servlet-mapping>
 
   <servlet>
     <servlet-name>RandomMeals</servlet-name>
@@ -90,7 +113,7 @@
     <location>/errorPage.jsp</location>
   </error-page>
 
-    <error-page>
+  <error-page>
     <error-code>404</error-code>
     <location>/errorPage.jsp</location>
   </error-page>
@@ -101,36 +124,37 @@
   </error-page>
 
   <filter>
-  <filter-name>CorsFilter</filter-name>
-  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
-  <init-param>
-    <param-name>cors.allowed.origins</param-name>
-    <param-value>http://mealmatrix.richardsonprogramming.com</param-value>
-  </init-param>
-  <init-param>
-    <param-name>cors.allowed.methods</param-name>
-    <param-value>GET,POST,HEAD,OPTIONS,PUT</param-value>
-  </init-param>
-  <init-param>
-    <param-name>cors.allowed.headers</param-name>
-    <param-value>Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers</param-value>
-  </init-param>
-  <init-param>
-    <param-name>cors.exposed.headers</param-name>
-    <param-value>Access-Control-Allow-Origin,Access-Control-Allow-Credentials</param-value>
-  </init-param>
-  <init-param>
-    <param-name>cors.support.credentials</param-name>
-    <param-value>true</param-value>
-  </init-param>
-  <init-param>
-    <param-name>cors.preflight.maxage</param-name>
-    <param-value>10</param-value>
-  </init-param>
-</filter>
-<filter-mapping>
-  <filter-name>CorsFilter</filter-name>
-  <url-pattern>/*</url-pattern>
-</filter-mapping>
+    <filter-name>CorsFilter</filter-name>
+    <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+    <init-param>
+      <param-name>cors.allowed.origins</param-name>
+      <param-value>http://mealmatrix.richardsonprogramming.com</param-value>
+    </init-param>
+    <init-param>
+      <param-name>cors.allowed.methods</param-name>
+      <param-value>GET,POST,HEAD,OPTIONS,PUT</param-value>
+    </init-param>
+    <init-param>
+      <param-name>cors.allowed.headers</param-name>
+      <param-value>Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers</param-value>
+    </init-param>
+    <init-param>
+      <param-name>cors.exposed.headers</param-name>
+      <param-value>Access-Control-Allow-Origin,Access-Control-Allow-Credentials</param-value>
+    </init-param>
+    <init-param>
+      <param-name>cors.support.credentials</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>cors.preflight.maxage</param-name>
+      <param-value>10</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>CorsFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
 </web-app>

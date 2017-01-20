@@ -4,7 +4,7 @@
  * a request attribute with those food lists so the jsp can update the textareas
  * with the new, modified food lists.
  *
- * @version v.14 1-3-2017
+ * @version v.15 1-18-2017
  * @author Sarah Richardson
  */
 
@@ -26,10 +26,14 @@ public class EditMatrixServlet extends HttpServlet {
 						throws IOException, ServletException {
 		// get connection pool to pass in to model layer so it can get connection
 		DataSource ds = (DataSource)getServletContext().getAttribute("DBCPool");
-		EditFood ef = new EditFood(ds);
+
+		// get userId
+		HttpSession session = request.getSession();
+		int userId = (Integer) session.getAttribute("UserId");
+		EditFood ef = new EditFood(ds, userId);
 
 		// pass in user input string in lower case to add or delete method
-		// since all food items in the database are lower case
+		// since all food items in the database are lower case 
 		if (request.getParameter("typeOfEdit").equals("delete")) {
 			ef.deleteFood(request.getParameter("foodEdit").toLowerCase());
 		}
@@ -42,8 +46,8 @@ public class EditMatrixServlet extends HttpServlet {
 		// "required" attribute is handling this for now.)
 
 		// now that food DB has been updated, get an updated list of foods 
-		FoodMatrix fm = new FoodMatrix();	
-		List<List<Food>> foodLists = fm.getFoodLists(ds);
+		FoodMatrix fm = new FoodMatrix(ds, userId);	
+		List<List<Food>> foodLists = fm.getFoodLists();
 		
 		// use this list to add headers to textareas that state the food types
 		List<String> foodTypes = new ArrayList<String>();

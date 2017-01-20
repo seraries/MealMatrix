@@ -1,11 +1,10 @@
-/* This servlet is called at the start of a session, initiates a DB connection in
- * session scope (since context is never destroyed on AWS), gets the user's food
- * items from the database, stores these in lists, and passes the lists on to 
- * the jsp which fills all the textareas with foods from these lists as well as 
- * displaying forms by which users can generate random meals and can edit their 
- * food choices.
+/* This servlet is called at Login from index.html button click. It checks 
+ * that user is valid and if so gets the user's food items from the database, 
+ * stores these in lists, and passes the lists on to the displayMatrix.jsp which 
+ * fills all the textareas with foods from these lists as well as displaying
+ * forms by which users can generate random meals and edit their food choices.
  *
- * @version v.14 1-3-2017
+ * @version v.15 1-18-2017
  * @author Sarah Richardson
  */
 
@@ -25,12 +24,36 @@ public class FillMatrixServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 						throws IOException, ServletException {
-		// get connection pool to pass in to model layer so it can get connection
+		
 		DataSource ds = (DataSource)getServletContext().getAttribute("DBCPool");
+		String userName = request.getParameter("userName");
+		NewUser newUser = new NewUser(ds, userName);
+
+		int userId = newUser.getUserId();
+		// if I get back a valid user Id, add it to a session attribute
+		// and proceed to fill the user's matrix with their food items
+		if (userId != -1) {
+			HttpSession session = request.getSession();
+			session.setAttribute("UserId", userId);
+			makeFoodLists(request, ds, userId, response);
+		}
+		// else give error message
+		else {
+			RequestDispatcher rd = request.getRequestDispatcher("index.html");
+			response.setContentType("text/html");
+			PrintWriter out = response.getWriter();
+			out.println("<font color=red>No user found with given username, please register first. </font>");
+			rd.include(request, response);
+		}
+	}
+
+	private void makeFoodLists(HttpServletRequest request, DataSource ds, 
+							int userId, HttpServletResponse response) 
+							throws IOException, ServletException {
 
 		// The FoodMatrix accesses the database to get food items
-		FoodMatrix fm = new FoodMatrix();	
-		List<List<Food>> foodLists = fm.getFoodLists(ds);
+		FoodMatrix fm = new FoodMatrix(ds, userId);	
+		List<List<Food>> foodLists = fm.getFoodLists();
 
 		// use this list to add headers to textareas that state the food types
 		List<String> foodTypes = new ArrayList<String>();
@@ -45,7 +68,5 @@ public class FillMatrixServlet extends HttpServlet {
 
 		RequestDispatcher view = request.getRequestDispatcher("displayMatrix.jsp");
 		view.forward(request, response);
-		
 	}
-
 }

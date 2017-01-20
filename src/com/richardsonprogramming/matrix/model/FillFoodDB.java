@@ -1,9 +1,8 @@
-/* This class creates food objects from hard-coded data arrays. It then uses
- * these food objects to fill the table it creates, Food, with their data,
- * in the Foods database.
- * It is controlled by ResetMatrixServlet, in response to reset button click.
+/* This class creates food objects from hard-coded data arrays. It was 
+ * used only once to initialize the database. Not needed by the program 
+ * after that.
  *
- * @version v.14 1-3-2017
+ * @version v.15 1-15-2017
  * @author Sarah Richardson
  */
 
@@ -15,7 +14,7 @@ import javax.sql.DataSource;
 
 public class FillFoodDB {
 
-	public void resetDB(DataSource ds) {
+	public void fillDB(DataSource ds) {
 		// raw data arrays (initial foods to put in the database)
 		String [][] foodData = {{"veggies", "celery", "1/2 cup"}, {"veggies", 
 		"mushrooms", "1 cup"}, {"veggies", "tomatoes", "1/2 cup"}, {"veggies", 
@@ -89,8 +88,9 @@ public class FillFoodDB {
 		// connect with DB and store items there
 		String dropSql = "DROP TABLE IF EXISTS Food";
 		String createSql = "CREATE TABLE Food (id INT AUTO_INCREMENT PRIMARY KEY, "
-						+ "type varchar(20), name varchar(45), servingSize varchar(45))";
-		String insertSql = "insert into Food values (NULL, ?, ?, ?)";
+						+ "type varchar(20), name varchar(45), servingSize varchar(45), " 
+						+ "default_food varchar(4))";
+		String insertSql = "insert into Food values (NULL, ?, ?, ?, ?)";
 
 		try (Connection con = ds.getConnection(); 
 			PreparedStatement psDrop = con.prepareStatement(dropSql); 
@@ -106,6 +106,7 @@ public class FillFoodDB {
 				psInsert.setString(1, item.getType());
 				psInsert.setString(2, item.getName()); 
 				psInsert.setString(3, item.getServingSize()); 
+				psInsert.setString(4, item.getIsDefault()); 
 				psInsert.executeUpdate();
 			}	
 		}

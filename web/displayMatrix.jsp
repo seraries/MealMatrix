@@ -6,19 +6,44 @@
 	<script src="js/bootstrap.min.js"></script>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/matrix.css" rel="stylesheet">
-	<script src="js/matrix.js"></script>
-	
+	<script src="js/matrix.js"></script>	
 </head>
+
 <body>
-	<h2 align="center">Paleo Matrix Food Selections</h2>
+	<nav class="navbar navbar-default">  
+  <div class="container-fluid">
+   <div class="navbar-header">
+     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
+     <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+   </div> 
+   <div class="collapse navbar-collapse"  id="main-navbar">
+     <ul class="nav navbar-nav">
+       <li ><a href="http://www.richardsonprogramming.com">RichardsonProgramming</a></li>
+       <li class="active"><a href="http://mealmatrix.richardsonprogramming.com">Meal Matrix</a></li>
+       <!--<li ><a href="html/video.html">Video Demo</a></li>-->
+     </ul>
+   </div>
+   </div>
+  </nav>
+
+ <h2>Paleo Matrix Food Selections</h2>
+  <ol class="breadcrumb">
+  <li><a href="http://www.richardsonprogramming.com">RichardsonProgramming</a></li>
+  <li><a href="http://mealmatrix.richardsonprogramming.com">Meal Matrix</a></li>
+  <li class="active">Use Matrix</li>
+  </ol>
 	<br><!--This displays all the text areas with the ingredients listed for each food type with a header of the food type, based on what count we're on in the loop (-1 to make it zero-based) and using arraylist attribute "foodTypes"-->
 	<form id="generateMeals" method="POST" action="MakeMeals.do"><div class="container"><div class="row"><c:forEach var="foodType" items="${foodLists}" varStatus="count"><div class="col-xs-9 col-md-2"><textarea id="${foodTypes[count.count - 1]}"><c:out value="${foodTypes[count.count - 1]}"/>:&#13;&#10;<c:forEach var="food" items="${foodType}">${food}&#13;&#10;</c:forEach></textarea><label for="${foodTypes[count.count - 1]}"># of <c:out value="${foodTypes[count.count - 1]}"/>/meal: </label><input type="number" min="0" max="10" step="1" name="${foodTypes[count.count - 1]}" id="${foodTypes[count.count - 1]}" value="0"></div>&nbsp</c:forEach></div></div> <!--13 and 10 format the new line, put this all on one line so no spaces in textareas <--><br><label for="numMeals">How many meals would you like to generate?</label>
 		<input type="number" min="1" max="10" step="1" id="numMeals" name="numMeals" value="3" required="true">
 		<input type="submit" name="submit" value="Generate Meals" id="genMeals">
 	</form>
-	<!--The form generated above lets user pick how many items per food type per meal, and how many random meals to generate a list of -->
+	<!--The form generated above lets user pick how many items per food type per meal, 
+	and how many random meals to generate a list of -->
 	
-		
 	<textarea id="mealDisplay" class="randomMeals">
 	</textarea>
 	<br>
@@ -43,6 +68,10 @@
 	</div>
 	<br>
 	<input type="button" id="resetMatrix" name="resetMatrix" value="Reset Food Lists To Default Options">
+	&nbsp
+	<form id="logoutForm" method="POST" action="Logout.do">
+	<input type="Submit" id="logout" name="logout" value="Logout">
+	</form>
 	<br>
 </body>
 </html>

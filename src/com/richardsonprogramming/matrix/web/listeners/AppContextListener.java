@@ -1,3 +1,9 @@
+/* This listener gets the JNDI look up for the datasource and stores
+ * it in a servlet context attribute.
+ *
+ * @version v.15 1-18-2017
+ * @author Sarah Richardson
+ */
 package com.richardsonprogramming.matrix.web.listeners;
 
 import java.io.File;
@@ -6,7 +12,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-// import org.apache.tomcat.jdbc.pool.DataSource;
+
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;

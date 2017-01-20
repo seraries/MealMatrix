@@ -4,7 +4,7 @@
  * in a request attribute and forwards it to a jsp that displays these meals in 
  * a textarea.
  *
- * @version v.14 1-3-2017
+ * @version v.15 1-18-2017
  * @author Sarah Richardson
  */
 
@@ -27,8 +27,11 @@ public class MakeRandomMealsServlet extends HttpServlet {
 
 		// get connection pool to pass in to model layer so it can get connection
 		DataSource ds = (DataSource)getServletContext().getAttribute("DBCPool");
-		FoodMatrix fm = new FoodMatrix();	
-		List<List<Food>> foodLists = fm.getFoodLists(ds);
+		HttpSession session = request.getSession();
+		int userId = (Integer) session.getAttribute("UserId");
+
+		FoodMatrix fm = new FoodMatrix(ds, userId);	
+		List<List<Food>> foodLists = fm.getFoodLists();
 		
 		int numberOfMeals = 0; // default value in case form input is empty
 		String [] foodTypes = {"Veggies", "Proteins", "Fruits", "Fats", 

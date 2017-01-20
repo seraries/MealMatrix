@@ -1,12 +1,12 @@
-<!-- This is the home page for AWS matrix site. Users must login in order to 
-use the matrix.
+<!-- This is the registration page for AWS matrix site. New users 
+must register before logging in to use the matrix.
 Last Modified: 1-18-2017 v.15
 By: Sarah Richardson
 -->
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Paleo Matrix Meal Maker--Login</title>
+	<title>Paleo Matrix Meal Maker--Register</title>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -34,19 +34,22 @@ By: Sarah Richardson
    </div>
   </nav>
 
- <h1>Paleo Matrix Meal Generator Login</h1>
+ <h1>Paleo Matrix Meal Generator Sign Up</h1>
   <ol class="breadcrumb">
   <li><a href="http://www.richardsonprogramming.com">RichardsonProgramming</a></li>
   <li><a href="http://mealmatrix.richardsonprogramming.com">Meal Matrix</a></li>
-  <li class="active">Login</li>
+  <li class="active">Sign Up</li>
   </ol>
+<!--TO DO: Make this into a register/login page (the index.html on GoDaddy will advertise the page and let user
+link/redirect to the AWS site and thereby arrive at this login page: in order for "Use Meal Generator"
+button to work, they have to be registered/logged in) -->
 
-<form method="POST" action="FillMatrix.do">
-	<strong>Username</strong>: <input type="text" name="userName" required="true"><br>
-	<input type="SUBMIT" value= "Login">	
+<form method="POST" action="Register.do">
+	<strong>Pick a Username</strong>: <input type="text" name="userName" required="true"><br>
+	<input type="SUBMIT" value= "Sign Up">	
 </form>
 <br>
-If you are a new user, please <a href="register.html">sign up here!</a>
+If you are an existing user, please <a href="index.html">login here!</a>
 
 </body>
 </html>

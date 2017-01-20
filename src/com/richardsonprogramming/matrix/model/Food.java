@@ -1,7 +1,7 @@
 /* This class makes a food object with a given type (e.g. "fruits"), name 
- * (e.g., "oranges"), and serving size (e.g., "1/2 cup").
+ * (e.g., "oranges"), serving size (e.g., "1/2 cup"), and default value ("yes")
  *
- * @version v.14 1-3-2017
+ * @version v.15 1-15-2017
  * @author Sarah Richardson
  */
 
@@ -11,17 +11,31 @@ public class Food {
 	private String type;
 	private String name;
 	private String servingSize; 
+	private String isDefault;  
 
+	// constructor used with FoodMatrix.java-
+	public Food (String type, String name, String servingSize, String isDefault) {
+		this.type = type;
+		this.name = name;
+		this.servingSize = servingSize;
+		this.isDefault = isDefault;
+	}
+
+	// constructor used with FillFoodDB.java--fills database with 
+	// default foods, therefore assigns "yes" to "isDefault"
 	public Food (String type, String name, String servingSize) {
 		this.type = type;
 		this.name = name;
 		this.servingSize = servingSize;
+		this.isDefault = "yes";
 	}
 
-	// constructor with default serving size for user-added foods
+	// constructor with default serving size for user-added foods and
+	// since these are not the default foods in db, assign "no" to "isDefault"
 	public Food (String type, String name){
 		this.type = type;
 		this.name = name;
+		this.isDefault = "no";
 		if (type == "veggies" || type == "fruits") {
 			this.servingSize = "1/2 cup";
 		} else if (type == "proteins") {
@@ -41,6 +55,9 @@ public class Food {
 		return this.name;
 	}
 
+	public String getIsDefault() {
+		return this.isDefault;
+	}
 	public String getServingSize() {
 		return this.servingSize;
 	}
