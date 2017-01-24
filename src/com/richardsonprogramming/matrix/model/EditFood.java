@@ -23,8 +23,6 @@ public class EditFood {
 		this.ds = ds;
 		this.userId = userId;
 	}
-	// If it does already exist there, just need
-	// to add that id and the users id to a new row in Users_Foods
 
 	// Takes user's input of a food name and food type to insert food in DB
 	public void addFood(String foodType, String foodName) {
@@ -56,6 +54,7 @@ public class EditFood {
 	    	rs.close();
     		// use same query as before to get the id for the food
     		// whether it is newly created or not
+    		// and then add that food to the Users_Foods table
     		ResultSet rs1 = psQuery.executeQuery();
     		while(rs1.next()) {
     			foodId = rs1.getInt("id");
