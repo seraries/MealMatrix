@@ -21,10 +21,10 @@
           minEvictableIdleTimeMillis="30000"
           closeMethod="close"
           jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"
-          username="sarah"
-          password="sarah123"
+          username="notRealUserNameHere"
+          password="notRealPasswordHere"
           driverClassName="com.mysql.jdbc.Driver"
-          url="jdbc:mysql://my-db-mysql-identifier.cflvmv9k2u9d.us-west-2.rds.amazonaws.com:3306/FoodDB?useSSL=false"/>
+          url="jdbc:mysql://notRealDatabaseUrlForAWSRDS"/>
  
 </Context>
 
